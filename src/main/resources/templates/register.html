@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Board</title>
+</head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var formObj = $("#board");
+
+        $("#btnRegister").on("click",function () {
+            formObj.attr("action",register);
+            formObj.attr("method",post);
+            formObj.submit();
+
+        })
+
+    })
+</script>
+<body>
+    <h2>Register</h2>
+    <form id="board" action="success.html" th: action="@{register}"
+          th:object="${board}" method="post">
+        <table>
+            <tr>
+                <td>Title</td>
+                <td><input type="text" name="title" th:field="{title}"/></td>
+                <td><font color="red">
+                    <span th:if="${#fields.hasError('title')}"
+                          th:errors="*{title}">
+                    Title 에러 메세지
+                    </span>
+                </font></td>
+            </tr>
+            <tr>
+                <td>writer</td>
+                <td><input type="text" name="writer" th:field="{writer}"/></td>
+                <td><font color="red">
+                    <span th:if="${#fields.hasError('writer')}"
+                          th:errors="*{writer}">
+                    Writer 에러 메세지
+                    </span>
+                </font></td>
+            </tr>
+            <tr>
+                <td>Content</td>
+                <td><textarea name="content" th:field="*{content}"></textarea></td>
+                <td><font color="red">
+                    <span th:if="${#fields.hasError('content')}"
+                          th:errors="*{content}">
+                    Content 에러 메세지
+                    </span>
+                </font></td>
+            </tr>
+        </table>
+    </form>
+
+    <div>
+        <button type="submit" id="btnRegister">Register</button>
+    </div>
+</body>
+</html>
