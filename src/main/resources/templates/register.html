@@ -20,44 +20,69 @@
 </script>
 <body>
     <h2>Register</h2>
-    <form id="board" action="success.html" th: action="@{register}"
-          th:object="${board}" method="post">
+
+    <a th:href="@{registerGet?userId=test$passwd=1234}">register?userId=gogo&amp;passwd=1234</a><br>
+    <a th:href="@{register/test}">register/test</a>
+
+    <form th:action="@{/board/registerPost}" method="post">
+        userId: <input type="text" name="userId" value="test"><br>
+        <!--  input type="password" 지정하면 비밀번호를 숨김 표시할 수 있다.      -->
+        passwd: <input type="password" name="passwd" value="1234"><br>
+        coin: <input type="text" name="coin" value="100"><br>
+        <input type="submit" value="registerPost">
+
+
         <table>
             <tr>
-                <td>Title</td>
-                <td><input type="text" name="title" th:field="{title}"/></td>
-                <td><font color="red">
-                    <span th:if="${#fields.hasError('title')}"
-                          th:errors="*{title}">
-                    Title 에러 메세지
-                    </span>
-                </font></td>
+                <td>ID</td>
+                <td><input type="text" name="userId"></td>
             </tr>
             <tr>
-                <td>writer</td>
-                <td><input type="text" name="writer" th:field="{writer}"/></td>
-                <td><font color="red">
-                    <span th:if="${#fields.hasError('writer')}"
-                          th:errors="*{writer}">
-                    Writer 에러 메세지
-                    </span>
-                </font></td>
+                <td>PW</td>
+                <td><input type="password" name="passwd"></td>
             </tr>
             <tr>
-                <td>Content</td>
-                <td><textarea name="content" th:field="*{content}"></textarea></td>
-                <td><font color="red">
-                    <span th:if="${#fields.hasError('content')}"
-                          th:errors="*{content}">
-                    Content 에러 메세지
-                    </span>
-                </font></td>
+                <td>Date</td>
+                <td><input type="date" name="passwd"></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="radio" name="radioTest" value="Java" checked>Java<br>
+                    <input type="radio" name="radioTest" value="Python">Python<br>
+                    <input type="radio" name="radioTest" value="Golang">Golang<br>
+                </td>
+            </tr>
+            <tr>
+                <td>학생인가요?</td>
+                <td><input type="checkbox" name="student" value="Y"></td>
+            </tr>
+            <tr>
+                <td>국적</td>
+                <td>
+                    <select name="nationality" class="jobs">
+                        <option value="korea" selected>한국</option>
+                        <option value="china">중국</option>
+                        <option value="japan">일본</option>
+                    </select>
+                </td>
             </tr>
         </table>
     </form>
 
-    <div>
-        <button type="submit" id="btnRegister">Register</button>
-    </div>
+    <form>
+        cars: <select name="cars" multiple>
+            <option value="volvo">Volvo</option>
+            <option value="tesla">Tesla</option>
+            <option value="nissan">Nissan</option>
+            <option value="porsche">Porsche</option>
+        </select><br>
+        <textarea name="introduction" rows="6" cols="50"></textarea><br>
+        <table>
+            <tr>
+                <td><input type="submit" name="btnSubmit" value="등록"></td>
+                <td><input type="reset" name="btnReset" value="리셋"></td>
+            </tr>
+        </table>
+    </form>
 </body>
 </html>
