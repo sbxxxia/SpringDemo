@@ -7,9 +7,9 @@ import java.util.Random;
 
 @Component
 public class RandNumRepository {
-    static Random rand = new Random();
 
     public RandNumMessage getRandom(){
+
         return new RandNumMessage();
     }
 }

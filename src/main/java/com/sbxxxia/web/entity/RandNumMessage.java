@@ -6,11 +6,11 @@ public class RandNumMessage {
     static Random rand = new Random();
     private Integer randNumber;
 
-    public RandNumMessage(){
+    public RandNumMessage() {
         this.randNumber = rand.nextInt(32) + 1;
     }
 
-    public Integer getRandNumber(){
+    public Integer getRandNumber() {
         return randNumber;
     }
 }

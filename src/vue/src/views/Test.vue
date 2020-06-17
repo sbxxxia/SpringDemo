@@ -30,18 +30,18 @@ export default {
       this.message = this.message.split('').reverse().join()
       // $가 붙으면 Vue 내장 함수를 사용하겠다는 의미가 된다.
       // 객체가 파괴되면 우리가 어떠한 요청을 넣어도 응답하지 않게 된다.
-      this.$destroy()
+      // this.$destroy()
     },
     increment: function () {
       this.$store.commit('increment')
       // 먼저 기능을 연동하고 이후 상태값 저장하는 것을 볼 것 (F5)
-      this.$cookies.set('value',this.$store.state.count)
-      console.log(this.$cookies.get('value'))
+      // this.$cookies.set('value', this.$store.state.count)
+      // console.log(this.$cookies.get('value'))
     },
     decrement: function () {
       this.$store.commit('decrement')
-      this.$cookies.set('value',this.$store.state.count)
-      console.log(this.$cookies.get('value'))
+      // this.$cookies.set('value', this.$store.state.count)
+      // console.log(this.$cookies.get('value'))
     },
     randomNumber: function () {
       this.$store.dispatch('generateRandomNumber')
