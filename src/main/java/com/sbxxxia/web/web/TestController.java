@@ -50,7 +50,7 @@ public class TestController {
         model.addAttribute(service.read(boardNo));
     }
 
-    @GetMapping("/remove")
+    @PostMapping("/remove")
     public String remove(int boardNo, Model model) throws Exception {
         logger.info("remove");
 
