@@ -9,18 +9,42 @@
     <b>random: {{ this.$store.getters.random }}</b><br>
     <input type="button" @click="increment()" value="increment"/>
     <input type="button" @click="decrement()" value="decrement"/>
-    <input type="button" @click="randomNumber()" value="random"/>
+    <input type="button" @click="randomNumber()" value="random"/><br>
+    <local-component v-bind:num="value"></local-component>
+    <button v-on:click="plus">Click!</button>
+    <global-component v-bind:initial-counter="counter"></global-component>
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
+import cookies from 'vue-cookies'
+import LocalComponent from '../components/LocalComponent'
+// 추가할 곳에서 Global Component에 해당하는 녀석을 import 해준다.
+import GlobalComponent from '../components/GlobalComponent'
+
+// 실제 Vue 객체에 전역적으로 사용하는 Component임을 알리도록 한다.
+
+Vue.component(GlobalComponent.name, GlobalComponent)
+Vue.use(cookies)
+
 export default {
   data () {
     return {
       cnt: 0,
       count: 7,
+      counter: 7000,
+      value: 3000,
       message: '안녕 난 뷰야 ~'
     }
+  },
+  components: {
+    // Local Component의 특징은
+    // 이런식으로 등록한 녀석들만 사용할 수 있게 된다.
+    // 즉 다른 녀석들은 사용이 불가능하다.
+    // Global Component는 이런 식으로 추가할 필요가 없다.
+    // Vue 객체 전역에 자동으로 컴포넌트가 추가된다.
+    'local-component': LocalComponent
   },
   methods: {
     reverseMsg: function () {
@@ -35,16 +59,19 @@ export default {
     increment: function () {
       this.$store.commit('increment')
       // 먼저 기능을 연동하고 이후 상태값 저장하는 것을 볼 것 (F5)
-      // this.$cookies.set('value', this.$store.state.count)
-      // console.log(this.$cookies.get('value'))
+      this.$cookies.set('value', this.$store.state.count)
+      console.log(this.$cookies.get('value'))
     },
     decrement: function () {
       this.$store.commit('decrement')
-      // this.$cookies.set('value', this.$store.state.count)
-      // console.log(this.$cookies.get('value'))
+      this.$cookies.set('value', this.$store.state.count, '24h')
+      console.log(this.$cookies.get('value'))
     },
     randomNumber: function () {
       this.$store.dispatch('generateRandomNumber')
+    },
+    plus: function () {
+      this.value++
     }
   },
   // Vue의 경우엔 객체에 대한 변경을 감지하면 무조건 Rendering을 수행한다.
@@ -53,6 +80,10 @@ export default {
     // alert('Before Create: ' + this.message)
   },
   created () {
+    // this.$cookies에 'value' 키값 형태로 값이 저장되어 있다.
+    // 하지만 이것을 store에 있는 count에 복원해주지 않았기 때문에
+    // 상태값이 저장되지 않았던 것이다.
+    this.$store.state.count = this.$cookies.get('value')
     // alert('Created: ' + this.message)
   },
   beforeMount () {

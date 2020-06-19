@@ -1,4 +1,4 @@
-package com.sbxxxia.web;
+package com.sbxxxia.web.config;
 
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

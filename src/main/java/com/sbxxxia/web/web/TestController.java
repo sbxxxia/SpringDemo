@@ -62,11 +62,12 @@ public class TestController {
     }
 
     @GetMapping("/modify")
-    public void modifyForm(Board board, Model model) throws Exception {
+    public void modifyForm(int boardNo, Model model) throws Exception {
         logger.info("modifyForm");
 
-        service.modify(board);
+//        service.modify(board);
 //        model.addAttribute();
+        model.addAttribute(service.read(boardNo));
     }
 
     @PostMapping("/modify")
